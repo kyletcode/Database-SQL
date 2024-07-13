@@ -2,11 +2,7 @@ import pyodbc
 import datetime
 
 # Connection to database from Management Studio to VSC
-connect_db = ("DRIVER={ODBC DRIVER 17 FOR SQL Server};"
-              "Server=DESKTOP-TIV4J1P\\SQLEXPRESS;"
-              "Database=KnightHardwareDB;"
-              "UID=sa;"
-              "PWD=Xeronate123*"
+connect_db = (...
               )
  
 def get_db_connection():
