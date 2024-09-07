@@ -12,4 +12,9 @@ ORDER BY ProductName;
 
 --======================================================
 
-SELECT COUNT
+SELECT COUNT(*) AS NumberOfProducts,
+      MAX(ListPrice) AS MostExpensiveProduct,
+      MIN(DateAdded) AS OldestProducts
+From Products
+
+--======================================================
