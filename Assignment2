@@ -1,0 +1,15 @@
+SELECT ProductName From Product
+
+--======================================================
+
+SELECT COUNT(*) AS NumberOfProducts
+
+--======================================================
+
+SELECT ProductName, ListPrice, DateAdded
+FROM Products
+ORDER BY ProductName;
+
+--======================================================
+
+SELECT COUNT
