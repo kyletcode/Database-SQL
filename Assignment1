@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS number_of_invoices, SUM(InvoiceTotal) AS grand_invoice_total FROM Invoices
