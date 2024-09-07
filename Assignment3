@@ -1,0 +1,50 @@
+SELECT CONCAT(LastName, ', ',FirstName) AS full_name
+FROM Customers
+WHERE LastName BETWEEN 'M' AND 'Z'
+ORDER BY LastName ASC;
+
+--===========================================================
+
+SELECT ProductName, ListPrice, DateAdded
+FROM Products
+Where ListPrice > 500 AND ListPrice < 2000
+ORDER BY DateAdded DESC;
+
+--===========================================================
+
+SELECT ProductName, ListPrice, DiscountPercent,
+ListPrice * DiscountPercent AS Discount_Amount,
+ListPrice * (1 - DiscountPercent) AS Discount_Price
+FROM Products
+ORDER BY Discount_Price DESC;
+
+--==========================================================
+
+SELECT ItemID, ItemPrice, DiscountAmount, Quantity, 
+ItemPrice * Quantity AS Price_Total,
+DiscountAmount * Quantity AS Discount_Total,
+(ItemPrice - DiscountAmount) * Quantity AS Item_Total
+FROM OrderItems
+
+--==========================================================
+
+SELECT ItemID, ItemPrice, DiscountAmount, Quantity,
+ItemPrice * Quantity AS Price_Total,
+DiscountAmount * Quantity AS Discount_Total,
+(ItemPrice - DiscountAmount) * Quantity AS Item_Total
+FROM OrderItems
+WHERE (ItemPrice - DiscountAmount) * Quantity > 500
+ORDER BY iTEM_ttoal DESC;
+
+--==========================================================
+
+SELECT OrderID, OrderDate, ShipDate
+FROM Orders,
+WHERE ShipDate IS NULL
+
+--==========================================================
+
+SELECT 100 AS Price,
+.07 AS Tax_Rate,
+100 * .07 AS TaxAmount,
+100 + (100 * .07) AS Total;
