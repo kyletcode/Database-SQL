@@ -1,0 +1,66 @@
+SELECT COUNT(*) AS Orders,
+SUM(TaxAmount) AS TotalTaxAmount
+FROM Orders;
+
+--=================================================================
+
+SELECT CategoryName,
+COUNT(*) AS ProductCount,
+MAX(ListPrice) AS MostExpensiveProduct
+FROM Categories c JOIN Products p
+    ON c.CategoryID = p.CategoryID
+GROUP BY CategoryName
+ORDER BY ProductCount DESC;
+
+--=================================================================
+
+SELECT EmailAddress, SUM(ItemPrice * Quantity) AS ItemPriceTotal,
+SUM(DiscountAmount * Quantity) AS DiscountAmountTotal
+FROM Customers c JOIN Orders o
+    ON c.CustomerID = o.CustomerID
+JOIN OrderItems oi
+    ON o.OrderID = oi.OrderID
+GROUP BY EmailAddress
+ORDER BY ItemPriceTotal DESC;
+
+--=================================================================
+
+SELECT EmailAddress, COUNT(o.OrderID) AS OrderCount,
+SUM((ItemPrice - DiscountAmount) * Quantity) AS OrderTotal
+FROM Customers c
+    JOIN Orders o ON c.CustomerID = o.CustomerID
+    JOIN OrderItems oi ON o.OrderID = oi.OrderID
+GROUP BY EmailAddress
+HAVING COUNT(o.OrderID) > 1
+ORDER BY OrderTotal DESC;
+
+--=================================================================
+
+SELECT EmailAddress, COUNT(o.OrderID) AS OrderCount,
+SUM((ItemPrice - DiscountAmount) * Quantity) AS OrderTotal
+FROM Customers c JOIN Orders o
+    ON c.CustomerID = o.CustomerID
+JOIN OrderItems oi
+    ON o.OrderID = oi.OrderID
+WHERE ItemPrice > 400
+GROUP BY EmailAddress
+HAVING COUNT(o.OrderID) > 1
+ORDER BY OrderTotal DESC;
+
+--=================================================================
+
+SELECT ProductName, SUM((ItemPrice - DiscountAmount) * Quantity) AS ProductTotal
+FROM Products p
+JOIN OrderItems oi ON p.ProductID = oi.ProductID
+GROUP BY ROLLUP(ProductName);
+
+--=================================================================
+
+SELECT EmailAddress,
+COUNT(DISTINCT oi.ProductID) AS NumberOfProducts
+FROM Customers c
+JOIN Order o ON c.CustomerID = o.CustomerID
+JOIN OrderItems oi ON o.OrderID = oi.OrderID
+GROUP BY EmailAddress
+HAVING COUNT(DISTINCT oi.ProductID) > 1
+ORDER BY EmailAddress;
